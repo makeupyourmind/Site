@@ -1,0 +1,322 @@
+<html lang = "en" >
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>Заголовок страницы</title>
+  <style>
+     body
+     {
+       background-image: url(background.jpg);
+     }
+
+     A
+     {
+       text-decoration: none;
+  	   color : #FFFFFF;
+  	   font-family:'Times New Roman';
+     }
+
+     A:hover
+     {
+       background: #786b59;
+     }
+
+     .block
+     {
+       text-align: center; width : 70%; margin-left : 15%
+     }
+
+     h1
+     {
+       color: #FFFFFF; font-size: 400%;
+     }
+
+     label
+     {
+       color: #FFFFFF; font-size: 150%;
+     }
+
+     input[type=submit]
+     {
+       background-color: grey;
+       color: white;
+       padding: 10px;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+       margin-left: 172px;
+       width: 170px;
+     }
+
+     .logo
+     {
+    	margin-top : 40px;
+    	font-family:'Times New Roman';
+    	font-size: 200%;
+    	color : #FFFFFF;
+    	padding-bottom: 30px;
+     }
+     .picture
+     {
+       margin-left: 100px;
+       width : 450px;
+     }
+
+     .text
+     {
+      float : right;
+  	  margin-top : 60px;
+      font-size : 25px;
+      width: 750px;
+      height: 30px;
+    }
+     .text div
+     {
+       float: right;
+       margin-right: 80px;
+       width: 100px;
+     }
+
+     @media(max-width : 1300px)
+     {
+       hr
+       {
+        margin-top : 45px;
+       }
+     }
+
+     ul
+     {
+      display: block;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 120px;
+     }
+     li
+     {
+       width: 120px;
+       padding-top: 5px ;
+       margin-top: 5px;
+       padding-left: 5px;
+     }
+
+     ul.submenu
+     {
+         display: none;
+         width: 120px;
+         top: 37px;
+         left: 0;
+         background: grey;
+         font-size: 20px ;
+     }
+
+     ul.menu > li:hover > ul.submenu
+     {
+         display: block;
+     }
+
+     .service
+     {
+       padding: 0;
+       margin: 0;
+     }
+
+     div .form
+     {
+       width: 350px;
+       margin: 0 auto;
+     }
+     .nick, .pass, .email
+     {
+       text-align: right;
+     }
+
+     input
+     {
+       width : 170px;
+       height: 40px;
+       padding: 12px 20px;
+       font-size : 13px;
+       border: 1px grey solid;
+     }
+
+     .enterError
+     {
+        color: #fffb00;
+        margin-left: 180px;
+        text-align: center;
+        font-size: 17px;
+        display: none;
+     }
+
+
+  </style>
+</head>
+<body ng-app = "errorName" ng-controller = "controlName">
+
+
+  <div class = "logo">
+
+ <span class = "picture"><img src = "/logo.png" width = "401" height = "75" > </span>
+
+ <div class = "text">
+
+    <div><a href = "/contact" >Contact</a></div>
+
+    <div><ul class = "menu"><li class="service"><a href = "/about" >Services</a>
+
+      <ul class="submenu">
+             <li><a href=#>Sudmenu 1</a></li>
+             <li><a href=#>Sudmenu 1</a></li>
+             <li><a href=#>Sudmenu 1</a></li>
+       </ul>
+
+   </li></ul></div>
+
+    <div><a href = "/about" >About</a></div> <div> <a href = "/" >Home</a></div>
+
+ </div>
+
+ </div>
+
+ <br><hr>
+
+
+  <div class = "block">
+  <h1>Put your information to sign up</h1>
+  <div class = "form">
+  <form name = "myForm" method = "post" action = "/getData" onsubmit="return checkForm()">
+
+    <div class = "nick"> <label>Your NickName : </label>
+      <input type = "text" name = "name" class = "form-control" placeholder = "Enter Your NickName" autocomplete="off" id = "name" onclick = "offBorderName()" ng-model = "name">
+      <span ng-repeat = "item in dataset | filter : name : true " style = "color : yellow">Имя <span id = "item">{{item.name}}</span> уже занято</span>
+      <span class = "enterError" id = 'errorName'></span>
+    </div>
+          <br></br>
+    <div class="pass"> <label>Password : </label>
+      <input type = "text" name = "password" placeholder = "Password" autocomplete = "off" id = "password" onclick = "offBorderPassword()">
+      <span class = "enterError" id = 'errorPassword'></span>
+    </div>
+          <br></br>
+    <div class="email"> <label>Email : </label>
+        <input type="text" id = "email" name = "email" placeholder="Enter E-mail" onclick = "offBorderEmail()">
+        <span class = "enterError" id = 'errorEmail'></span>
+    </div>
+    <br>
+
+    <input name = "clock" id = "clock" hidden = "true">
+    <input type = "submit" id = "submit" value="Submit data">
+
+
+  </form>
+
+
+  <script>
+   function checkForm()
+   {
+     if(document.myForm.name.value == '')
+     {
+       document.getElementById('errorName').style.display = 'block';
+       document.getElementById('errorName').innerHTML = 'Enter data';
+       document.getElementById('name').style.border = '1px solid red';
+       return false;
+     }
+     if(document.myForm.password.value == '')
+     {
+       document.getElementById('errorPassword').style.display = 'block';
+       document.getElementById('errorPassword').innerHTML = 'Enter data';
+       document.getElementById('password').style.border = '1px solid red';
+       return false;
+     }
+
+     var y = document.getElementById('email').value;
+     at = y.indexOf("@");
+     dot = y.indexOf(".");
+
+     if( at < 1 || dot < 1 )
+     {
+       document.getElementById('errorEmail').style.display = 'block';
+       document.getElementById('errorEmail').innerHTML = 'Enter data';
+       document.getElementById('email').style.border = '1px solid red';
+       return false;
+     }
+
+     if(document.getElementById('name').value == document.getElementById('item').innerHTML)
+     {
+       document.getElementById('name').style.border = '1px solid red';
+       return false;
+     }
+
+     return true;
+   }
+
+  </script>
+
+
+  <script>
+
+
+  var d = new Date();
+
+  var day = new Array("Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+
+  var month=new Array("January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December");
+
+   //document.write( day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear() + "г.");
+   document.getElementById('clock').value = day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear() + "г.";
+   //var date = new Date();
+  //document.write( date.getDay() + " "  + date.getHours());
+
+  </script>
+
+
+   <script>
+   function offBorderName()
+   {
+      document.getElementById("errorName").style.display = "none";
+      document.getElementById('name').style.border = '1px solid grey';
+   }
+   function offBorderPassword()
+   {
+      document.getElementById("errorPassword").style.display = "none";
+      document.getElementById('password').style.border = '1px solid grey';
+   }
+   function offBorderEmail()
+   {
+      document.getElementById("errorEmail").style.display = "none";
+      document.getElementById('email').style.border = '1px solid grey';
+   }
+   </script>
+
+
+
+   <script>
+
+     var myApp = angular.module('errorName',[ ]);
+
+     myApp.controller('controlName', ['$scope', '$http', function ($scope,$http){
+       $scope.name = '';
+
+   $scope.getUser = function (){
+       $http.get('getDb')
+   .then(function(response) {
+         $scope.dataset = response.data;
+     });
+
+   }
+
+    $scope.getUser();
+
+     }]);
+
+   </script>
+
+
+
+  </div>
+</div>
+
+</body>
+</html>

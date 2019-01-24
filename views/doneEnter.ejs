@@ -1,0 +1,239 @@
+<html lang = "en" >
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <title>User Base</title>
+  <style>
+      body
+      {
+        background-image: url(background.jpg);
+      }
+      .block{text-align: center; width : 70%; margin-left : 15%}
+      h1
+      {
+        color: #FFFFFF; font-size: 400%;
+        text-align: center;
+      }
+      p
+      {
+        color: #FFFFFF; font-size: 300%;
+      }
+      b
+      {
+        color: #FFFFFF; font-size: 150%;
+      }
+
+      .divtable
+      {
+        margin-left: 300px;
+        width : 600px;
+        border-radius: 5px;
+      }
+
+      table
+      {
+        background-color: white;
+        width: 100%;
+        border: 16px solid #ECE9E0;
+        border-radius: 20px;
+
+      }
+      .naming
+      {
+        font-family: "Lucida Sans Unicode";
+        font-size: 22px;
+        background: #ECE9E0;
+        text-align: center;
+      }
+      .data
+      {
+        font-family:  "Lucida Grande";
+        background: #F5D7BF;
+        height: 30px;
+        text-align: center;
+      }
+
+      button
+      {
+        background-color: grey;
+        color: white;
+        padding: 2px 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      textarea
+      {
+        display: none;
+        margin-left: 10px;
+      }
+
+      input
+      {
+        background-color: grey;
+        color: white;
+        padding: 2px 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .send
+      {
+        background-color: grey;
+        color: white;
+        padding: 2px 3px;
+        width: 100px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 490px;
+        margin-top: 10px;
+        font-size: 13px;
+      }
+
+      .close
+      {
+        float : right;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        width: 50px;
+        text-align: center;
+        font-size: 13px;
+      }
+
+      .getter
+      {
+        float : left;
+        margin-left: 10px;
+        margin-bottom: 5px;
+        width: 300px;
+        font-size: 13px;
+      }
+
+      .message
+      {
+        display: none;
+      }
+
+
+  </style>
+</head>
+<body ng-app="myApp" ng-controller = "myController">
+  <div class = "block">
+  <h1>User Base</h1>
+
+    <div class = "divtable">
+      <table>
+        <tr>
+          <td class = "naming">Id</td>
+          <td class = "naming">NickName</td>
+          <td class = "naming">Password</td>
+          <td class = "naming">Email</td>
+          <td class = "naming">Registration date</td>
+          <td class = "naming">Send Message</td>
+          <td class = "naming">Delete User</td>
+        <tr>
+        <tr ng-repeat = "item in dataset">
+          <td class = "data">{{item.id}}</td>
+          <td class = "data">{{item.name}}</td>
+          <td class = "data">{{item.password}}</td>
+          <td class = "data">{{item.email}}</td>
+          <td class = "data">{{item.time}}</td>
+          <td class = "data"><button id = "link" name = "link" onclick="sendEmail()" ng-click="linkUser(item.email)">Link</button></td>
+          <td class = "data"><button ng-click="delUser(item.id)">Del User</button></td>
+        </tr>
+      </table>
+
+      <br><br>
+<form name = "myForm" id = "myForm" action="/sendMessage" method="post">
+
+      <div class="message" id = "message">
+          <input class = "getter" type="text" name="addEmail" id = "addEmail" value = "{{dataLink}}">
+          <input class = "close" name = "close"  value = "Close" onclick="offHide()">
+          <textarea name="text" rows="8" cols="80" id = "hide" placeholder="Enter your message"></textarea>
+          <input class = "send" type="submit" id = "submit" name="submit" value="Send Message">
+      </div>
+</form>
+
+<div id="result" style = "color : yellow "></div>
+
+    </div>
+  </div>
+
+
+  <script>
+$(function () {
+  $("#myForm").submit(function (event) {
+    event.preventDefault();
+    $.post("/sendMessage", $(this).serialize());
+    document.getElementById("result").innerHTML = "Message sent to user";
+    setTimeout(function(){ $('#result').hide(); }, 5000);
+    setTimeout(function(){ $('#result').show(); }, 2000);
+  })
+
+})
+  </script>
+
+
+  <script>
+   function offHide()
+   {
+     document.getElementById("message").style.display = "none";
+     document.getElementById("hide").style.display = "none";
+     document.getElementById("result").style.display = "none";
+   }
+   function sendEmail()
+   {
+     document.getElementById("message").style.display = 'block';
+     document.getElementById("hide").style.display = 'block';
+     document.getElementById("hide").value = '';
+   }
+  </script>
+
+  <script>
+
+    var myApp = angular.module('myApp',[ ]);
+
+    myApp.controller('myController', ['$scope', '$http', function ($scope,$http){
+      $scope.name = '';
+      $scope.password = '';
+
+      $scope.getUser = function ()
+      {
+          $http.get('getDb')
+         .then(function(response)
+         {
+            $scope.dataset = response.data;
+         });
+
+      }
+
+     $scope.delUser = function(recId)
+      {
+            console.log(recId);
+            if(confirm('Are you sure you want to delete this record ? '))
+            {
+              $http({method: 'GET', url: '/getDb/delUser?id='+recId})
+              .then(function(response)
+                {
+                    $scope.getUser();
+                });
+            }
+      }
+
+       $scope.linkUser = function(Email)
+        {
+             $scope.dataLink = document.getElementById('addEmail').innerHTML = Email;
+        }
+
+       $scope.getUser();
+
+    }]);
+
+  </script>
+
+</body>
+</html>

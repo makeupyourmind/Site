@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+  </head>
+  <style>
+    body
+    {
+      background-image: url(background.jpg);
+    }
+    .block
+    {
+      text-align: center;
+      width: 750px;
+      margin: 0 auto;
+      font-size: 13px;
+    }
+    h1
+    {
+      color: #FFFFFF;
+      font-size: 400%;
+    }
+    .user
+    {
+      background-color : white;
+      width : 700px;
+      height : 600px;
+      margin: 0 auto;
+      text-align: center;
+      color : #000000;
+      font-size: 22px;
+
+    }
+    .data
+    {
+      text-align: left;
+      font-size: 18px;
+      color : #000000;
+      width: 300px;
+      margin-left: 40px;
+    }
+
+  </style>
+  <body>
+    <div class = "block">
+      <h1>Welcome to your home page, <%= data.name %><h1>
+    </div>
+
+     <div class="user"><br>
+       <div class="data">
+          <p>Your NickName : <%= data.name %></p>
+          <p>Your Password : <%= data.password %></p>
+          <p>Your Email : <%= data.email %> </p>
+        </div>
+    </div>
+
+  </body>
+</html>

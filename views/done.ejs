@@ -1,0 +1,73 @@
+<html lang = "en" >
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <title>Заголовок страницы</title>
+  <style>
+      body
+      {
+        background-image: url(background.jpg);
+      }
+      .block{text-align: center; width : 70%; margin-left : 15%}
+      h1
+      {
+        color: #FFFFFF; font-size: 400%;
+      }
+      p
+      {
+        color: #FFFFFF; font-size: 300%;
+      }
+      b
+      {
+        color: #FFFFFF; font-size: 150%;
+      }
+
+      .enterError
+      {
+         color: #fffb00;
+         margin-left: 180px;
+         text-align: center;
+         font-size: 17px;
+         display: none;
+      }
+
+  </style>
+</head>
+<body>
+  <div class = "block">
+  <h1>Подтвердите регистрацию</h1>
+  <p>Введите код отправленный на ваш Email</p>
+  <div id="conEm">
+    <form name ="myForm" method="post" action="/confirmEmail" onsubmit="return proveForm()">
+        <input type="text" id = "code" name="confirmEmail" placeholder="Enter code from Email" onclick = "offBorderCode()"><br><br>
+        <span class = "enterError" id = 'errorCode'></span>
+
+      <input type = "submit" id = "submit" value = "Send">
+    </form>
+
+     <script>
+       function proveForm()
+       {
+         if(document.myForm.confirmEmail.value == '' || document.myForm.confirmEmail.value != <%= data %>)
+         {
+           document.getElementById('errorCode').style.display = 'block';
+           document.getElementById('errorCode').innerHTML = 'Error code';
+           document.getElementById('code').style.border = '1px solid red';
+           return false;
+         }
+
+       }
+     </script>
+
+     <script>
+       function offBorderCode()
+       {
+         document.getElementById("errorCode").style.display = "none";
+         document.getElementById('code').style.border = '1px solid grey';
+       }
+     </script>
+
+  </div>
+
+</div>
+</body>
+</html>
