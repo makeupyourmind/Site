@@ -141,21 +141,37 @@ email : function(req,res)
     }
   });
 */
-
-
 var transporter = nodemailer.createTransport({
-service: 'gmail',
-auth: {
-    user: 'process.env.marinanov04016776@gmail.com',
-    pass: 'process.env.marinanov'
-}
+  host: 'smtp.gmail.com',
+  port : 465,
+  secure: true,
+  auth: {
+    user: 'marinanov04016776@gmail.com',
+    pass: 'marinanov'
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
-transporter.sendMail({
-from: req.body.email,
-to: 'process.env.marinanov040167@gmail.com',
-subject: req.body.subject,
-text: req.body.message + '\n\nMy email : ' + req.body.email
- });
+
+var mailOptions =
+{
+  name: req.body.name,
+  from: req.body.email,
+  to: 'marinanov040167@gmail.com',
+  subject: req.body.subject,
+  text: req.body.message + '\n\nMy email : ' + req.body.email
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+    console.log(mailOptions);
+    transporter.end();
+  }
+});
 
 },
 
