@@ -113,7 +113,7 @@ email : function(req,res)
 {
 
   var nodemailer = require('nodemailer');
-
+/*
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -140,6 +140,40 @@ email : function(req,res)
       transporter.end();
     }
   });
+*/
+
+
+let smtpTransport;
+  try {
+    smtpTransport = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // true for 465, false for other ports 587
+      auth: {
+        user: "marinanov04016776@gmail.com",
+        pass: "marinanov"
+      }
+    });
+  } catch (e) {
+    return console.log('Error: ' + e.name + ":" + e.message);
+  }
+
+  let mailOptions = {
+    from: req.body.email, // sender address
+    to: 'marinanov040167@gmail.com', // list of receivers
+    subject: req.body.subject, // Subject line
+    text: req.body.message + '\n\nMy email : ' + req.body.email // plain text body
+  };
+
+  smtpTransport.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      // return console.log(error);
+      return console.log('Error');
+    } else {
+      console.log('Message sent: %s', info.messageId);
+    }
+})
+
 
 },
 
