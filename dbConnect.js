@@ -143,22 +143,19 @@ email : function(req,res)
 */
 
 
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-     user: 'marinanov04016776@gmail.com',
-     pass: 'marinanov'
-    }
+var transporter = Email.createTransport({
+service: 'gmail',
+auth: {
+    user: 'process.env.marinanov04016776@gmail.com',
+    pass: 'process.env.marinanov'
+}
 });
-
-console.log('created');
 transporter.sendMail({
-    name: req.body.name,
-    from: req.body.email,
-    to: 'marinanov040167@gmail.com',
-    subject: req.body.subject,
-    text: req.body.message + '\n\nMy email : ' + req.body.email
-});
+from: req.body.email,
+to: 'process.env.marinanov040167@gmail.com',
+subject: req.body.subject,
+text: req.body.message + '\n\nMy email : ' + req.body.email
+ });
 
 },
 
