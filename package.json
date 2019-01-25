@@ -5,6 +5,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^6.1.4",
     "body-parser": "^1.18.3",
     "cli-js": "0.0.8",
     "ejs": "^2.6.1",

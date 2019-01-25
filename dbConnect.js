@@ -3,37 +3,18 @@ module.exports = {
 getData : function(req,res)
 {
 
-  var nodemailer = require('nodemailer');
-
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'marinanov04016776@gmail.com',
-      pass: 'marinanov'
-    }
-  });
-
-  req.body.text = rand=Math.floor((Math.random() * 100) + 54);
-  res.render(__dirname + '/views/done', {data : req.body.text } );
-  var textCode = req.body.text;
-
-  var mailOptions =
-  {
-    name: req.body.name,
-    from: req.body.email,
-    to: req.body.email,
-    subject: req.body.subject,
-    text: "Ваш код подтверждения : " + req.body.text + '\n\nMy email : ' + req.body.email
-  };
-
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-      console.log(mailOptions);
-    }
-  });
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey("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");
+req.body.text = rand=Math.floor((Math.random() * 100) + 54);
+var textCode = req.body.text;
+res.render(__dirname + '/views/done', {data : req.body.text } );
+const msg = {
+  to: req.body.email,					//receiver's email
+  from: 'marinanov04016776@gmail.com',			//sender's email
+  subject: 'req.body.subject',//Subject
+  text: "Ваш код подтверждения : " + req.body.text + '\n\nMy email : ' + req.body.email		//content		//HTML content
+};
+sgMail.send(msg);
 
 const { Client } = require('pg');
 
@@ -112,66 +93,15 @@ client.query('select name, password, email from usersdata WHERE name = $1', [nam
 email : function(req,res)
 {
 
-  var nodemailer = require('nodemailer');
-/*
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'marinanov04016776@gmail.com',
-      pass: 'marinanov'
-    }
-  });
-
-  var mailOptions =
-  {
-    name: req.body.name,
-    from: req.body.email,
-    to: 'marinanov040167@gmail.com',
-    subject: req.body.subject,
-    text: req.body.message + '\n\nMy email : ' + req.body.email
-  };
-
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-      console.log(mailOptions);
-      transporter.end();
-    }
-  });
-*/
-var transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port : 465,
-  secure: true,
-  auth: {
-    user: 'marinanov04016776@gmail.com',
-    pass: 'marinanov'
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
-var mailOptions =
-{
-  name: req.body.name,
-  from: req.body.email,
-  to: 'marinanov040167@gmail.com',
-  subject: req.body.subject,
-  text: req.body.message + '\n\nMy email : ' + req.body.email
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey("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");
+const msg = {
+  to: 'marinanov040167@gmail.com',					//receiver's email
+  from: req.body.email,			//sender's email
+  subject: req.body.subject,//Subject
+  text: req.body.message + '\n\nMy name is ' + req.body.name + ', my email : ' + req.body.email,		//content		//HTML content
 };
-
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-    console.log(mailOptions);
-    transporter.end();
-  }
-});
+sgMail.send(msg);
 
 },
 
