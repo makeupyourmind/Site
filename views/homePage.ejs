@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" dir="ltr">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="utf-8">
     <title>Home Page</title>
   </head>
@@ -41,19 +43,155 @@
       margin-left: 40px;
     }
 
+    .changePassword
+    {
+       margin-left: 320px;
+       margin-top: -80px;
+       width: 180px;
+    }
+
+    .newPassword, .change, .oldPassword, .moreNewPassword
+    {
+      margin-left: 25px;
+      margin-top: 10px;
+      width: 170px;
+      border: 1px solid grey;
+    }
+
+    .newPassword, .change, .oldPassword, .moreNewPassword
+    {
+      display: none;
+    }
+
+    .close
+    {
+      margin-top: 10px;
+      margin-left: 150px;
+      display: none;
+    }
+
+    A
+    {
+       color : black;
+       font-size: 17px;
+       margin-left: 620px;
+    }
+
   </style>
   <body>
     <div class = "block">
       <h1>Welcome to your home page, <%= data.name %><h1>
     </div>
-
      <div class="user"><br>
+       <a href="/">Log Out</a>
        <div class="data">
           <p>Your NickName : <%= data.name %></p>
           <p>Your Password : <%= data.password %></p>
           <p>Your Email : <%= data.email %> </p>
         </div>
+     <form name="myForm" id = "myForm" action="/changePassword" method="post" >
+<input id = "dataEmail" name = "dataEmail" value = "<%= data.email %>" type = "text" style = "display : none">
+<input id = "dataName" name = "dataName" value = "<%= data.name %>" type = "text" style = "display : none">
+<input id = "dataPassword" value = "<%= data.password %>" type = "text" style = "display : none">
+        <div class = "changePassword">
+          <button type="button" name="button" onclick="newForm()">Change Password</button> <button id = "close" class="close" type="button" name="button" onclick = "escape()" >Close</button>
+          <input class = "oldPassword" id = "oldPassword" type="text" autocomplete = "off" name="oldPassword" value="" onclick="hide()" placeholder="Enter current password">
+          <input class = "newPassword" id = "newPassword" type="text" autocomplete = "off" name="newPassword" value="" placeholder="Enter new password">
+          <input class = "moreNewPassword" id = "moreNewPassword" type="text" autocomplete = "off" name="moreNewPassword" value="" onclick="hide2()" placeholder="Enter new password again">
+          <input class = "change" id = "submit" type="submit" name="submit" value="Change">
+        </div>
+
+    </form>
+    <div id="result" style = "color : black; font-size: 15px; margin-top: 5px;"></div>
     </div>
+
+
+    <script>
+
+    function escape()
+    {
+      document.getElementById("close").style.display = 'none';
+      document.getElementById("oldPassword").style.display = 'none';
+      document.getElementById("newPassword").style.display = 'none';
+      document.getElementById("moreNewPassword").style.display = 'none';
+      document.getElementById("submit").style.display = 'none';
+    }
+
+    </script>
+
+    <script>
+  $(function () {
+    $("#myForm").submit(function (event) {
+
+      if(document.getElementById('oldPassword').value != document.getElementById('dataPassword').value || document.getElementById('oldPassword').value == '')
+      {
+        document.getElementById('oldPassword').style.border = '1px solid red';
+        return false;
+      }
+
+      if(document.getElementById('newPassword').value == '')
+      {
+        document.getElementById('newPassword').style.border = '1px solid red';
+        return false;
+      }
+
+      if(document.getElementById('moreNewPassword').value == '' || document.getElementById('newPassword').value != document.getElementById('moreNewPassword').value)
+      {
+        document.getElementById('moreNewPassword').style.border = '1px solid red';
+        document.getElementById('newPassword').style.border = '1px solid grey';
+        return false;
+      }
+
+      if(document.getElementById('newPassword').value == document.getElementById('moreNewPassword').value)
+      {
+        document.getElementById('moreNewPassword').style.border = '1px solid grey';
+      }
+
+      event.preventDefault();
+      $.post("/changePassword", $(this).serialize());
+      document.getElementById("result").innerHTML = "On email you got a new password";
+      setTimeout(function(){ $('#result').hide(); }, 5000);
+      setTimeout(function(){ $('#result').show(); }, 2000);
+    })
+
+  })
+    </script>
+
+     <script>
+
+     function hide()
+     {
+         document.getElementById('oldPassword').style.border = '1px solid grey';
+         document.getElementById('oldPassword').value = '';
+     }
+
+     </script>
+
+     <script>
+
+     function hide2()
+     {
+     document.getElementById('moreNewPassword').style.border = '1px solid grey';
+     document.getElementById('moreNewPassword').value = '';
+     }
+
+    </script>
+
+
+   <script>
+     function newForm()
+     {
+        document.getElementById("close").style.display = 'block';
+        document.getElementById("oldPassword").style.display = 'block';
+        document.getElementById("newPassword").style.display = 'block';
+        document.getElementById("moreNewPassword").style.display = 'block';
+        document.getElementById("oldPassword").value = '';
+        document.getElementById("newPassword").value = '';
+        document.getElementById("moreNewPassword").value = '';
+        document.getElementById("submit").style.display = 'block';
+     }
+   </script>
+
 
   </body>
 </html>

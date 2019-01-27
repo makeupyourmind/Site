@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html lang = "en" >
 <head>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -24,12 +25,39 @@
       .enterError
       {
          color: #fffb00;
-         margin-left: 180px;
+        float: right;
          text-align: center;
          font-size: 17px;
          display: none;
       }
 
+      input[type="text"]
+      {
+         text-align: center;
+         height: 15px;
+         border: 1px solid grey;
+      }
+
+      input[type='submit']
+      {
+        background-color: grey;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100px;
+        height: 30px;
+        margin-top: 10px;
+        margin-left: 35px;
+      }
+
+      #conEm
+      {
+        width: 220px;
+        height: 65px;
+        margin: 0 auto;
+        text-align: left;
+      }
   </style>
 </head>
 <body>
@@ -38,11 +66,12 @@
   <p>Введите код отправленный на ваш Email</p>
   <div id="conEm">
     <form name ="myForm" method="post" action="/confirmEmail" onsubmit="return proveForm()">
-        <input type="text" id = "code" name="confirmEmail" placeholder="Enter code from Email" onclick = "offBorderCode()"><br><br>
+        <input autofocus type="text" id = "code" name="confirmEmail" autocomplete="off" placeholder="Enter code from Email" onclick = "offBorderCode()">
         <span class = "enterError" id = 'errorCode'></span>
 
-      <input type = "submit" id = "submit" value = "Send">
+      <br><input type = "submit" id = "submit" value = "Send">
     </form>
+  </div>
 
      <script>
        function proveForm()
@@ -66,7 +95,6 @@
        }
      </script>
 
-  </div>
 
 </div>
 </body>

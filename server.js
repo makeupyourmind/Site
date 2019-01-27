@@ -7,14 +7,19 @@ app = express();
 //var pgp = require("pg-promise")();
 var dbConnect = require('./dbConnect.js');
 var sendMessage = require('./sendMessage.js');
+var changePassword = require('./changePassword.js');
 
 var port = process.env.PORT || 3000
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.set('view engine', 'ejs');
-app.use( express.static( "public" ) );
+
+//app.set('views', __dirname + '/views');
+
+app.use(express.static( "public" ) );
 
 
 app.get('/', function(req, res){
@@ -48,6 +53,7 @@ app.post('/getData', function(req,res)
 
 app.post('/homePage', function(req,res)
 {
+    console.log("connected");
     dbConnect.logIn(req,res);
 })
 
@@ -82,6 +88,10 @@ app.post( '/sendMessage', function(req,res)
     sendMessage.sendMessage(req,res);
 })
 
+app.post( '/changePassword', function(req,res)
+{
+    changePassword.changePassword(req,res);
+})
 
 /*
 app.get('/linkUser', function(req,res){

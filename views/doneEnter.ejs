@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html lang = "en" >
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -66,17 +67,17 @@
       textarea
       {
         display: none;
-        margin-left: 10px;
+        margin: 0 auto;
+        width: 581px;
       }
 
       input
       {
-        background-color: grey;
+        background-color: black;
         color: white;
         padding: 2px 3px;
         border: none;
         border-radius: 4px;
-        cursor: pointer;
       }
 
       .send
@@ -88,33 +89,34 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        margin-left: 490px;
+        float : right;
         margin-top: 10px;
         font-size: 13px;
       }
 
       .close
       {
-        float : right;
-        margin-right: 10px;
-        margin-bottom: 5px;
         width: 50px;
         text-align: center;
         font-size: 13px;
+        float: right;
+        margin-right: 5px;
       }
 
       .getter
       {
-        float : left;
-        margin-left: 10px;
         margin-bottom: 5px;
-        width: 300px;
+        width: 250px;
         font-size: 13px;
+        float: left;
+        margin-left: 5px;
       }
 
       .message
       {
         display: none;
+        margin: 0 auto;
+        width: 581px;
       }
 
 
@@ -152,20 +154,36 @@
       <div class="message" id = "message">
           <input class = "getter" type="text" name="addEmail" id = "addEmail" value = "{{dataLink}}">
           <input class = "close" name = "close"  value = "Close" onclick="offHide()">
-          <textarea name="text" rows="8" cols="80" id = "hide" placeholder="Enter your message"></textarea>
+          <input type="text" name="subject" id = "subject" placeholder="Enter subject" autocomplete="off" onclick = "offBorderSubject2()">
+          <textarea name="text" rows="5" cols="70" id = "hide" placeholder="Enter your message"></textarea>
           <input class = "send" type="submit" id = "submit" name="submit" value="Send Message">
       </div>
 </form>
 
-<div id="result" style = "color : yellow "></div>
+<div id="result" style = "color : yellow; margin-left: 30px "></div>
 
     </div>
   </div>
 
+  <script>
+  function offBorderSubject2()
+  {
+     document.getElementById('subject').style.border = '1px solid grey';
+  }
+  </script>
 
   <script>
 $(function () {
   $("#myForm").submit(function (event) {
+    if(document.getElementById('subject').value == '')
+    {
+      document.getElementById('subject').style.border = '1px solid red';
+      return false;
+    }
+    if(document.getElementById('subject').value != '')
+    {
+      document.getElementById('subject').style.border = '1px solid grey';
+    }
     event.preventDefault();
     $.post("/sendMessage", $(this).serialize());
     document.getElementById("result").innerHTML = "Message sent to user";
@@ -189,6 +207,7 @@ $(function () {
      document.getElementById("message").style.display = 'block';
      document.getElementById("hide").style.display = 'block';
      document.getElementById("hide").value = '';
+     document.getElementById("subject").value = '';
    }
   </script>
 

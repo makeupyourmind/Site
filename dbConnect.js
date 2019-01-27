@@ -4,18 +4,18 @@ getData : function(req,res)
 {
 
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey("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");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 req.body.text = rand=Math.floor((Math.random() * 100) + 54);
 var textCode = req.body.text;
 res.render(__dirname + '/views/done', {data : req.body.text } );
 const msg = {
   to: req.body.email,					//receiver's email
   from: 'marinanov04016776@gmail.com',			//sender's email
-  subject: 'req.body.subject',//Subject
-  text: "Ваш код подтверждения : " + req.body.text + '\n\nMy email : ' + req.body.email		//content		//HTML content
+  subject: 'Verification code',//Subject
+  text: "Your verification code : " + req.body.text + '\n\nMy email : ' + 'marinanov04016776@gmail.com'		//content		//HTML content
 };
 sgMail.send(msg);
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 const { Client } = require('pg');
 
 const client = new Client({
@@ -61,7 +61,6 @@ var nameBody = req.body.name;
 
 if(nameBody == 'admin' && password == 'admin')
 {
-  //res.sendFile(__dirname + '/doneEnter.html');
   res.render(__dirname + '/views/doneEnter');//попадает на страницу где видны все зарегистрированные пользователи
 }
 
@@ -75,9 +74,7 @@ client.query('select name, password, email from usersdata WHERE name = $1', [nam
 
   if(result.rows.length > 0 && nameBody == result.rows[0].name && password == result.rows[0].password )
   {
-    //res.render(__dirname + '/views/doneEnter', {data: req.body});
-    //console.log("data : " + result.rows[0]);
-    res.render(__dirname + '/views/homePage', {data: result.rows[0]});
+    res.render(__dirname + '/views/homePage', {data: result.rows[0]} );
   }
   else
   {
@@ -94,15 +91,14 @@ email : function(req,res)
 {
 
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey("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");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const msg = {
   to: 'marinanov040167@gmail.com',					//receiver's email
   from: req.body.email,			//sender's email
   subject: req.body.subject,//Subject
-  text: req.body.message + '\n\nMy name is ' + req.body.name + ', my email : ' + req.body.email,		//content		//HTML content
+  text: req.body.message + '\n\nMy name : ' + req.body.name,		//content		//HTML content
 };
 sgMail.send(msg);
-
 },
 
 getUsers : function(req,res)
@@ -154,7 +150,7 @@ client.query('Delete from usersdata Where id =' + req.query.id, function (err,re
 
 },
 
-//Подтверждение регистации при рекгистрации нового пользователя путем отправки кода на его емаил
+//Подтверждение регистации при регистрации нового пользователя путем отправки кода на его емаил
 confirmEmail : function(req,res)
 {
 
@@ -180,7 +176,17 @@ client.query('select *from usersdatatemp', (err, result) =>
     client.query("INSERT INTO usersdata (name,password,email,time) select name,password,email,time from usersdatatemp", function(req,res)
     {
     })
-    //res.sendFile(__dirname + "/homePage.html");
+
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: result.rows[0].email,					//receiver's email
+      from: 'marinanov04016776@gmail.com',			//sender's email
+      subject: 'Welcome to our site',//Subject
+      text: 'Thank you for registration on our site\n\nFrom support site My email : marinanov04016776@gmail.com'		//content		//HTML content
+    };
+    sgMail.send(msg);
+
     res.render(__dirname + '/views/homePage', {data: result.rows[0]});
   }
   else
