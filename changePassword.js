@@ -6,7 +6,7 @@ changePassword : function(req,res)
   const { Client } = require('pg');
 
   const client = new Client({
-    connectionString: "postgres://bfgndswprvioth:9efc3e033a9a42be027efe777a917f5ff0f65dddca409513228f83749b3bedf2@ec2-46-137-170-51.eu-west-1.compute.amazonaws.com:5432/d2iggciii1ml7o",
+    connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
 
