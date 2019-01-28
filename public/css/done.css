@@ -1,0 +1,54 @@
+body
+{
+  background-image: url('/public/background.jpg');
+}
+.block{text-align: center; width : 70%; margin-left : 15%}
+h1
+{
+  color: #FFFFFF; font-size: 400%;
+}
+p
+{
+  color: #FFFFFF; font-size: 300%;
+}
+b
+{
+  color: #FFFFFF; font-size: 150%;
+}
+
+.enterError
+{
+   color: #fffb00;
+  float: right;
+   text-align: center;
+   font-size: 17px;
+   display: none;
+}
+
+input[type="text"]
+{
+   text-align: center;
+   height: 15px;
+   border: 1px solid grey;
+}
+
+input[type='submit']
+{
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 35px;
+}
+
+#conEm
+{
+  width: 220px;
+  height: 65px;
+  margin: 0 auto;
+  text-align: left;
+}

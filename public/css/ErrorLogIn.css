@@ -1,0 +1,18 @@
+body
+{
+  background-image: url('/public/background.jpg');
+}
+.block{text-align: center; width : 70%; margin-left : 15%}
+h1
+{
+  color: #FFFFFF; font-size: 400%;
+}
+p a
+{
+  color: red;
+  font-size: 300%;
+}
+b
+{
+  color: #FFFFFF; font-size: 150%;
+}

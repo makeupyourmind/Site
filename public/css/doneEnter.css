@@ -1,0 +1,122 @@
+body
+{
+  background-image: url('/public/background.jpg');
+}
+.block{text-align: center; width : 70%; margin : 0 auto}
+h1
+{
+  color: #FFFFFF; font-size: 400%;
+  text-align: center;
+}
+p
+{
+  color: #FFFFFF; font-size: 300%;
+}
+b
+{
+  color: #FFFFFF; font-size: 150%;
+}
+
+.divtable
+{
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+table
+{
+  background-color: white;
+  width: 100%;
+  border: 16px solid #ECE9E0;
+  border-radius: 20px;
+
+}
+.naming
+{
+  font-family: "Lucida Sans Unicode";
+  font-size: 22px;
+  background: #ECE9E0;
+  text-align: center;
+}
+.data
+{
+  font-family:  "Lucida Grande";
+  background: #F5D7BF;
+  height: 30px;
+  text-align: center;
+}
+
+button
+{
+  background-color: grey;
+  color: white;
+  padding: 2px 3px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+textarea
+{
+  display: none;
+  margin: 0 auto;
+  width: 581px;
+}
+
+input
+{
+  background-color: black;
+  color: white;
+  padding: 2px 3px;
+  border: none;
+  border-radius: 4px;
+}
+
+.send
+{
+  background-color: grey;
+  color: white;
+  padding: 2px 3px;
+  width: 100px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float : right;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.close
+{
+  width: 50px;
+  text-align: center;
+  font-size: 13px;
+  float: right;
+  margin-right: 5px;
+}
+
+.getter
+{
+  margin-bottom: 5px;
+  width: 250px;
+  font-size: 13px;
+  float: left;
+  margin-left: 5px;
+}
+
+.message
+{
+  display: none;
+  margin: 0 auto;
+  width: 581px;
+}
+
+.c
+{
+border: 1px solid black;
+padding: 5px 10px;
+text-decoration: none; /* Убираем подчёркивание */
+color: black;
+background-color: grey;
+font-size: 22px;
+}
