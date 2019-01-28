@@ -89,7 +89,6 @@ client.query('select name, password, email from usersdata WHERE name = $1', [nam
 //Отправка писем со страницы контакты на почту админа
 email : function(req,res)
 {
-
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const msg = {
