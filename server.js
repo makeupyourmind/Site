@@ -3,8 +3,7 @@ http = require('http'),
 bodyParser = require('body-parser'),
 request = require('request'),
 app = express();
-//var Promise = require('promise');
-//var pgp = require("pg-promise")();
+
 var dbConnect = require('./dbConnect.js');
 var sendMessage = require('./sendMessage.js');
 var changePassword = require('./changePassword.js');
@@ -17,10 +16,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.set('view engine', 'ejs');
 
-//app.set('views', __dirname + '/views');
 app.use('/public', express.static('public'));
 app.use(express.static( "public" ) );
-
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -92,12 +89,6 @@ app.post( '/changePassword', function(req,res)
 {
     changePassword.changePassword(req,res);
 })
-
-/*
-app.get('/linkUser', function(req,res){
-  sendMessage.linkUser(req,res);
-})
-*/
 
 app.listen(port, function(){
   console.log("Мы отслеживаем порт : " + port );

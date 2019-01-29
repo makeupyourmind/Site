@@ -19,7 +19,6 @@ b
 .enterError
 {
    color: #fffb00;
-  float: right;
    text-align: center;
    font-size: 17px;
    display: none;
@@ -30,6 +29,8 @@ input[type="text"]
    text-align: center;
    height: 15px;
    border: 1px solid grey;
+   padding: 1px 1px;
+   width: 140px;
 }
 
 input[type='submit']
@@ -42,13 +43,43 @@ input[type='submit']
   width: 100px;
   height: 30px;
   margin-top: 10px;
-  margin-left: 35px;
+  margin-right: 80px;
 }
 
 #conEm
 {
-  width: 220px;
+  width: 300px;
   height: 65px;
   margin: 0 auto;
   text-align: left;
+}
+
+.code
+{
+  width: 224px;
+  float : left;
+  text-align: right;
+}
+
+.span
+{
+  float : right;
+  width: 75px;
+}
+
+.send
+{
+  width: 100px;
+  margin: 0 auto;
+}
+
+input[type="text"]::-webkit-input-placeholder {
+    font-family: 'Arial';
+    font-size: 12px;
+}
+
+.spam
+{
+  color: white;
+  font-size: 24px;
 }

@@ -7,14 +7,20 @@
   </head>
 <body>
   <div class = "block">
-  <h1>Подтвердите регистрацию</h1>
-  <p>Введите код отправленный на ваш Email</p>
+  <h1>Confirm Registration</h1>
+  <p>Enter the code sent to your email<br><span class = "spam">Please check your spam folder</span></p>
   <div id="conEm">
     <form name ="myForm" method="post" action="/confirmEmail" onsubmit="return proveForm()">
+      <div class="code">
         <input autofocus type="text" id = "code" name="confirmEmail" autocomplete="off" placeholder="Enter code from Email" onclick = "offBorderCode()">
+      </div>
+      <div class="span">
         <span class = "enterError" id = 'errorCode'></span>
-
-      <br><input type = "submit" id = "submit" value = "Send">
+      </div>
+      <br>
+      <div class="send">
+        <input type = "submit" id = "submit" value = "Send">
+      </div>
     </form>
   </div>
 

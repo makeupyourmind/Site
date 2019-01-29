@@ -200,8 +200,6 @@ client.query('select *from usersdatatemp', (err, result) =>
 
 });
 
-
-
 }
 
 }//end module

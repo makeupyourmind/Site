@@ -4,7 +4,7 @@ changePassword : function(req,res)
 {
 
   const { Client } = require('pg');
-  
+
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
@@ -40,8 +40,6 @@ changePassword : function(req,res)
     text: 'Your password was change on : ' + req.body.moreNewPassword + '\n\nFrom support site My email : marinanov04016776@gmail.com'		//content		//HTML content
   };
   sgMail.send(msg);
-
-
 
 }
 
