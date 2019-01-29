@@ -55,8 +55,8 @@
            });
 
         }
-         $scope.getUser();
-        $scope.changePassword = function()
+         //$scope.getUser();
+        $scope.changePassword = function ()
        {
           $http({method: 'GET', url = '/changePassword?name=' + $scope.name + '&password=' + $scope.password})
           .success(function()
