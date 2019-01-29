@@ -55,16 +55,16 @@
            });
 
         }
-
-        //$scope.changePassword = function()
-      //  {
-      //    $http({method: 'GET', url = '/changePassword?name=' + $scope.name + '&password=' + $scope.password})
-      //    .success(function(data, status)
-      //    {
-    //        alert('Password changed');
-      //      $scope.getUser();
-    //      });
-      //  }
+         $scope.getUser();
+        $scope.changePassword = function()
+       {
+          $http({method: 'GET', url = '/changePassword?name=' + $scope.name + '&password=' + $scope.password})
+          .success(function(data, status)
+          {
+            alert('Password changed');
+            $scope.getUser();
+          });
+      }
 
         $scope.getUser();
 
