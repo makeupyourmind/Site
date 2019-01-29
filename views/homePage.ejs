@@ -60,7 +60,7 @@
         $scope.changePassword = function ()
        {
           //$http({method: 'GET', url = '/changePassword?name=' + $scope.nam + '&password=' + $scope.pass}).
-          $http.get("'changePassword?name=' + $scope.nam + '&password=' + $scope.pass'")
+          $http.get('changePassword')
           .then(function()
           {
             alert('Password changed');
