@@ -59,8 +59,9 @@
          //$scope.getUser();
         $scope.changePassword = function ()
        {
-          $http({method: 'GET', url = '/changePassword?name=' + $scope.nam + '&password=' + $scope.pass}).
-          then(function()
+          //$http({method: 'GET', url = '/changePassword?name=' + $scope.nam + '&password=' + $scope.pass}).
+          $http.get("'changePassword?name=' + $scope.nam + '&password=' + $scope.pass'")
+          .then(function()
           {
             alert('Password changed');
             $scope.getUser();
