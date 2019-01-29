@@ -116,6 +116,11 @@ $(function () {
      $scope.delUser = function(recId)
       {
             console.log(recId);
+            if(recId == 1)
+            {
+              alert("You can't do it");
+            }
+            
             if(confirm('Are you sure you want to delete this record ? '))
             {
               $http({method: 'GET', url: '/getDb/delUser?id='+recId})
