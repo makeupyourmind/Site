@@ -10,23 +10,23 @@
 
   <body ng-app="myApp" ng-controller = "myController">
     <div class = "block">
-      <h1>Welcome to your home page, <%= data.name %></h1>
+      <h1>Welcome to your home page, <%= data.name %><h1>
     </div>
      <div class="user"><br>
        <a href="/">Log Out</a>
        <div class="data">
           <p>Your NickName : <%= data.name %></p>
-          <p>Your Password : <%= data.password %> </p>
+          <p>Your Password : <%= data.password %></p>
           <p>Your Email : <%= data.email %> </p>
         </div>
-     <form name = "myForm" id = "myForm">
+     <form name="myForm" id = "myForm">
 <input id = "dataEmail" name = "dataEmail" value = "<%= data.email %>" type = "text" style = "display : none">
 <input id = "dataName" name = "dataName" value = "<%= data.name %>" type = "text" style = "display : none">
 <input id = "dataPassword" value = "<%= data.password %>" type = "text" style = "display : none">
         <div class = "changePassword">
           <button type="button" name="button" onclick="newForm()">Change Password</button> <button id = "close" class="close" type="button" name="button" onclick = "escape()" >Close</button>
           <input class = "oldPassword" id = "oldPassword" type="text" autocomplete = "off" name="oldPassword" value="" onclick="hide()" placeholder="Enter current password">
-          <input class = "newPassword" id = "newPassword" type="text" autocomplete = "off" name="newPassword" value="" onclick = "hide2()" placeholder="Enter new password">
+          <input class = "newPassword" id = "newPassword" type="text" autocomplete = "off" name="newPassword" value="" placeholder="Enter new password">
           <input class = "moreNewPassword" id = "moreNewPassword" type="text" autocomplete = "off" name="moreNewPassword" value="" onclick="hide2()" placeholder="Enter new password again">
           <input class = "change" id = "submit" type="submit" name="submit" value="Change">
         </div>
@@ -42,8 +42,7 @@
       myApp.controller('myController', ['$scope', '$http', function ($scope,$http){
         $scope.name = '';
         $scope.password = '';
-        $scope.nam = '';
-        $scope.pass = '';
+
         $scope.getUser = function ()
         {
             $http.get('getDb')
@@ -53,19 +52,6 @@
            });
 
         }
-         //$scope.getUser();
-      /*
-        $scope.changePassword = function ()
-       {
-          //$http({method: 'GET', url = '/changePassword?name=' + $scope.nam + '&password=' + $scope.pass}).
-          $http.post('changePassword')
-          .then(function()
-          {
-            alert('Password changed');
-            $scope.getUser();
-          });
-      }
-    */
         $scope.getUser();
 
      }]);
@@ -139,10 +125,8 @@
 
      function hide2()
      {
-       document.getElementById('moreNewPassword').style.border = '1px solid grey';
-       document.getElementById('moreNewPassword').value = '';
-       document.getElementById('NewPassword').style.border = '1px solid grey';
-       document.getElementById('NewPassword').value = '';
+     document.getElementById('moreNewPassword').style.border = '1px solid grey';
+     document.getElementById('moreNewPassword').value = '';
      }
 
     </script>
