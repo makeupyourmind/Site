@@ -56,11 +56,13 @@ hr
  border : 1px solid;
  color : #FFFFFF;
 }
-@media(max-width : 1300px)
+
+@media(max-width : 1263px)
 {
-hr
-{
-  margin-top : 45px;}
+  .text
+  {
+   margin-top : 0;
+  }
 }
 
 .about

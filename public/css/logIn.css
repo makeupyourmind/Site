@@ -70,11 +70,11 @@ input[type=submit]
   width: 100px;
 }
 
-@media(max-width : 1300px)
+@media(max-width : 1263px)
 {
-  hr
+  .text
   {
-   margin-top : 45px;
+   margin-top : 0;
   }
 }
 

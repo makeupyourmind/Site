@@ -71,11 +71,11 @@ hr
  font-size: 120%;
  color : #C0C0C0;
 }
-@media(max-width : 1300px)
+@media(max-width : 1263px)
 {
-  hr
+  .text
   {
-   margin-top : 45px;
+   margin-top : 0;
   }
 }
 .log

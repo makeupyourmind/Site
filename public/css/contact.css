@@ -74,11 +74,11 @@ hr
  color : #FFFFFF;
 }
 
-@media(max-width : 1300px)
+@media(max-width : 1263px)
 {
-hr
+  .text
   {
-    margin-top : 35px;
+   margin-top : 0;
   }
 }
 
