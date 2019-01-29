@@ -22,7 +22,7 @@
           </table>
           <p>Your Email : <%= data.email %> </p>
         </div>
-     <form name="myForm" id = "myForm">
+     <form>
 <input id = "dataEmail" name = "dataEmail" value = "<%= data.email %>" type = "text" style = "display : none">
 <input id = "dataName" name = "dataName" value = "<%= data.name %>" type = "text" style = "display : none">
 <input id = "dataPassword" value = "<%= data.password %>" type = "text" style = "display : none">
@@ -59,8 +59,8 @@
          //$scope.getUser();
         $scope.changePassword = function ()
        {
-          $http({method: 'GET', url = '/changePassword?name=' + $scope.nam + '&password=' + $scope.pass})
-          .then(function()
+          $http({method: 'GET', url = '/changePassword?name=' + $scope.nam + '&password=' + $scope.pass}).
+          then(function()
           {
             alert('Password changed');
             $scope.getUser();
