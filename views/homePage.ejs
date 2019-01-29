@@ -58,12 +58,12 @@
          //$scope.getUser();
         $scope.changePassword = function ()
        {
-          $http({method: 'GET', url = '/changePassword?name=' + $scope.name + '&password=' + $scope.password})
-          .then(function()
-          {
+          //$http({method: 'GET', url = '/changePassword?name=' + $scope.name + '&password=' + $scope.password})
+          //.then(function()
+          //{
             alert('Password changed');
-            $scope.getUser();
-          });
+          //  $scope.getUser();
+          //});
       }
 
         $scope.getUser();
