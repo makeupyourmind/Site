@@ -26,7 +26,7 @@
         <div class = "changePassword">
           <button type="button" name="button" onclick="newForm()">Change Password</button> <button id = "close" class="close" type="button" name="button" onclick = "escape()" >Close</button>
           <input class = "oldPassword" id = "oldPassword" type="text" autocomplete = "off" name="oldPassword" value="" onclick="hide()" placeholder="Enter current password">
-          <input class = "newPassword" id = "newPassword" type="text" autocomplete = "off" name="newPassword" value="" placeholder="Enter new password">
+          <input class = "newPassword" id = "newPassword" type="text" autocomplete = "off" name="newPassword" value="" onclick = "hide2()" placeholder="Enter new password">
           <input class = "moreNewPassword" id = "moreNewPassword" type="text" autocomplete = "off" name="moreNewPassword" value="" onclick="hide2()" placeholder="Enter new password again">
           <input class = "change" id = "submit" type="submit" name="submit" value="Change">
         </div>
@@ -139,8 +139,10 @@
 
      function hide2()
      {
-     document.getElementById('moreNewPassword').style.border = '1px solid grey';
-     document.getElementById('moreNewPassword').value = '';
+       document.getElementById('moreNewPassword').style.border = '1px solid grey';
+       document.getElementById('moreNewPassword').value = '';
+       document.getElementById('NewPassword').style.border = '1px solid grey';
+       document.getElementById('NewPassword').value = '';
      }
 
     </script>
