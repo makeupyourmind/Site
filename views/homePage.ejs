@@ -15,14 +15,11 @@
      <div class="user"><br>
        <a href="/">Log Out</a>
        <div class="data">
-          <p>Your NickName : <span ng-model = "nam"><%= data.name %></span></p>
-          <input style = "display : none" type="text" name="" value="">
-          <table>
-              <tr ng-repeat = "item in dataset | filter : name = '<%= data.name %>' "><td>Your password : {{item.password}} </td></tr>
-          </table>
+          <p>Your NickName : <%= data.name %></p>
+          <p>Your Password : <%= data.password %> </p>
           <p>Your Email : <%= data.email %> </p>
         </div>
-     <form>
+     <form name = "myForm" id = "myForm">
 <input id = "dataEmail" name = "dataEmail" value = "<%= data.email %>" type = "text" style = "display : none">
 <input id = "dataName" name = "dataName" value = "<%= data.name %>" type = "text" style = "display : none">
 <input id = "dataPassword" value = "<%= data.password %>" type = "text" style = "display : none">
@@ -30,14 +27,14 @@
           <button type="button" name="button" onclick="newForm()">Change Password</button> <button id = "close" class="close" type="button" name="button" onclick = "escape()" >Close</button>
           <input class = "oldPassword" id = "oldPassword" type="text" autocomplete = "off" name="oldPassword" value="" onclick="hide()" placeholder="Enter current password">
           <input class = "newPassword" id = "newPassword" type="text" autocomplete = "off" name="newPassword" value="" placeholder="Enter new password">
-          <input class = "moreNewPassword" id = "moreNewPassword" ng-model = "pass" type="text" autocomplete = "off" name="moreNewPassword" value="" onclick="hide2()" placeholder="Enter new password again">
-          <input class = "change" id = "submit" type="submit" name="submit" value="Change" ng-click = "changePassword()">
+          <input class = "moreNewPassword" id = "moreNewPassword" type="text" autocomplete = "off" name="moreNewPassword" value="" onclick="hide2()" placeholder="Enter new password again">
+          <input class = "change" id = "submit" type="submit" name="submit" value="Change">
         </div>
 
     </form>
     <div id="result" style = "color : black; font-size: 15px; margin-top: 5px;"></div>
     </div>
-{{dataset}}
+
     <script>
 
       var myApp = angular.module('myApp',[ ]);
@@ -57,6 +54,7 @@
 
         }
          //$scope.getUser();
+      /*
         $scope.changePassword = function ()
        {
           //$http({method: 'GET', url = '/changePassword?name=' + $scope.nam + '&password=' + $scope.pass}).
@@ -67,7 +65,7 @@
             $scope.getUser();
           });
       }
-
+    */
         $scope.getUser();
 
      }]);
