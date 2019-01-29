@@ -15,7 +15,7 @@
      <div class="user"><br>
        <a href="/">Log Out</a>
        <div class="data">
-          <p>Your NickName : <span ng-model = "name"><%= data.name %></span></p>
+          <p>Your NickName : <span ng-model = "nam"><%= data.name %></span></p>
           <input style = "display : none" type="text" name="" value="">
           <table>
               <tr ng-repeat = "item in dataset | filter : name = '<%= data.name %>' "><td>Your password : {{item.password}} </td></tr>
@@ -30,7 +30,7 @@
           <button type="button" name="button" onclick="newForm()">Change Password</button> <button id = "close" class="close" type="button" name="button" onclick = "escape()" >Close</button>
           <input class = "oldPassword" id = "oldPassword" type="text" autocomplete = "off" name="oldPassword" value="" onclick="hide()" placeholder="Enter current password">
           <input class = "newPassword" id = "newPassword" type="text" autocomplete = "off" name="newPassword" value="" placeholder="Enter new password">
-          <input class = "moreNewPassword" id = "moreNewPassword" ng-model = "password" type="text" autocomplete = "off" name="moreNewPassword" value="" onclick="hide2()" placeholder="Enter new password again">
+          <input class = "moreNewPassword" id = "moreNewPassword" ng-model = "pass" type="text" autocomplete = "off" name="moreNewPassword" value="" onclick="hide2()" placeholder="Enter new password again">
           <input class = "change" id = "submit" type="submit" name="submit" value="Change" ng-click = "changePassword()">
         </div>
 
@@ -45,7 +45,8 @@
       myApp.controller('myController', ['$scope', '$http', function ($scope,$http){
         $scope.name = '';
         $scope.password = '';
-
+        $scope.nam = '';
+        $scope.pass = '';
         $scope.getUser = function ()
         {
             $http.get('getDb')
@@ -58,12 +59,12 @@
          //$scope.getUser();
         $scope.changePassword = function ()
        {
-          //$http({method: 'GET', url = '/changePassword?name=' + $scope.name + '&password=' + $scope.password})
-          //.then(function()
-          //{
+          $http({method: 'GET', url = '/changePassword?name=' + $scope.nam + '&password=' + $scope.pass})
+          .then(function()
+          {
             alert('Password changed');
-          //  $scope.getUser();
-          //});
+            $scope.getUser();
+          });
       }
 
         $scope.getUser();
