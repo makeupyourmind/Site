@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/public/css/homePage.css">
   </head>
 
-  <body>
+  <body ng-app="myApp" ng-controller = "myController">
     <div class = "block">
       <h1>Welcome to your home page, <%= data.name %><h1>
     </div>
@@ -16,7 +16,10 @@
        <a href="/">Log Out</a>
        <div class="data">
           <p>Your NickName : <%= data.name %></p>
-          <p>Your Password : <%= data.password %></p>
+          <input style = "display : none" type="text" name="" value="">
+          <table>
+              <tr ng-repeat = "item in dataset | filter : name = '<%= data.name %>' "><td>Your password : {{item.password}} </td></tr>
+          </table>
           <p>Your Email : <%= data.email %> </p>
         </div>
      <form name="myForm" id = "myForm" action="/changePassword" method="post" >
@@ -34,6 +37,30 @@
     </form>
     <div id="result" style = "color : black; font-size: 15px; margin-top: 5px;"></div>
     </div>
+
+    <script>
+
+      var myApp = angular.module('myApp',[ ]);
+
+      myApp.controller('myController', ['$scope', '$http', function ($scope,$http){
+        $scope.name = '';
+        $scope.password = '';
+
+        $scope.getUser = function ()
+        {
+            $http.get('getDb')
+           .then(function(response)
+           {
+              $scope.dataset = response.data;
+           });
+
+        }
+        $scope.getUser();
+
+     }]);
+
+   </script>
+
 
 
     <script>
