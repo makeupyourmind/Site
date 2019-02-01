@@ -102,6 +102,16 @@
        return false;
      }
 
+     var y = document.getElementById('email').value;
+     at = y.indexOf("@");
+     dot = y.indexOf(".");
+
+     if( at < 1 || dot < 1 )
+     {
+       document.getElementById('email').style.border = '1px solid red';
+       return false;
+     }
+     
      return true;
    }
 
