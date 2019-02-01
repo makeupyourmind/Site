@@ -4,7 +4,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>User Base</title>
+
     <link rel="stylesheet" href="/public/css/doneEnter.css">
+
+    <script src="/scripts/doneEnter/anjular.js"></script>
+    <script src="/scripts/doneEnter/CheckForm.js"></script>
+    <script src="/scripts/doneEnter/hide.js"></script>
+    <script src="/scripts/doneEnter/offBorderSubject2.js"></script>
+
   </head>
 <body ng-app="myApp" ng-controller = "myController">
    <a href="/" class = "c">To main</a>
@@ -48,101 +55,6 @@
 
     </div>
   </div>
-
-  <script>
-  function offBorderSubject2()
-  {
-     document.getElementById('subject').style.border = '1px solid grey';
-  }
-  </script>
-
-  <script>
-$(function () {
-  $("#myForm").submit(function (event) {
-    if(document.getElementById('subject').value == '')
-    {
-      document.getElementById('subject').style.border = '1px solid red';
-      return false;
-    }
-    if(document.getElementById('subject').value != '')
-    {
-      document.getElementById('subject').style.border = '1px solid grey';
-    }
-    event.preventDefault();
-    $.post("/sendMessage", $(this).serialize());
-    document.getElementById("result").innerHTML = "Message sent to user";
-    setTimeout(function(){ $('#result').hide(); }, 5000);
-    setTimeout(function(){ $('#result').show(); }, 2000);
-  })
-
-})
-  </script>
-
-
-  <script>
-   function offHide()
-   {
-     document.getElementById("message").style.display = "none";
-     document.getElementById("hide").style.display = "none";
-     document.getElementById("result").style.display = "none";
-   }
-   function sendEmail()
-   {
-     document.getElementById("message").style.display = 'block';
-     document.getElementById("hide").style.display = 'block';
-     document.getElementById("hide").value = '';
-     document.getElementById("subject").value = '';
-   }
-  </script>
-
-  <script>
-
-    var myApp = angular.module('myApp',[ ]);
-
-    myApp.controller('myController', ['$scope', '$http', function ($scope,$http){
-      $scope.name = '';
-      $scope.password = '';
-
-      $scope.getUser = function ()
-      {
-          $http.get('getDb')
-         .then(function(response)
-         {
-            $scope.dataset = response.data;
-         });
-
-      }
-      
-     $scope.delUser = function(recId)
-      {
-            console.log(recId);
-            if(recId == 1)
-            {
-              alert("You can't do it");
-            }
-            else
-          {
-            if(confirm('Are you sure you want to delete this record ? '))
-            {
-              $http({method: 'GET', url: '/getDb/delUser?id='+recId})
-              .then(function(response)
-                {
-                    $scope.getUser();
-                });
-            }
-          }
-      }
-
-       $scope.linkUser = function(Email)
-        {
-             $scope.dataLink = document.getElementById('addEmail').innerHTML = Email;
-        }
-
-       $scope.getUser();
-
-    }]);
-
-  </script>
 
 </body>
 </html>

@@ -5,7 +5,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="utf-8">
     <title>Home Page</title>
+
     <link rel="stylesheet" href="/public/css/homePage.css">
+
+    <script src="/scripts/homePage/anjular.js"></script>
+    <script src="/scripts/homePage/CheckForm.js"></script>
+    <script src="/scripts/homePage/escape.js"></script>
+    <script src="/scripts/homePage/hide.js"></script>
+    <script src="/scripts/homePage/hide2.js"></script>
+    <script src="/scripts/homePage/hide3.js"></script>
+    <script src="/scripts/homePage/newForm.js"></script>
+
   </head>
 
   <body ng-app="myApp" ng-controller = "myController">
@@ -37,142 +47,6 @@
     </div>
 
 <div id = "message"></div>
-
-    <script>
-
-      $('#myForm').submit(function(e) {
-
-        if(document.getElementById('oldPassword').value != document.getElementById('dataPassword').value || document.getElementById('oldPassword').value == '')
-        {
-          document.getElementById('oldPassword').style.border = '1px solid red';
-          return false;
-        }
-
-        if(document.getElementById('newPassword').value == '')
-        {
-          document.getElementById('newPassword').style.border = '1px solid red';
-          return false;
-        }
-
-        if(document.getElementById('moreNewPassword').value == '' || document.getElementById('newPassword').value != document.getElementById('moreNewPassword').value)
-        {
-          document.getElementById('moreNewPassword').style.border = '1px solid red';
-          document.getElementById('newPassword').style.border = '1px solid grey';
-          return false;
-        }
-
-        if(document.getElementById('newPassword').value == document.getElementById('moreNewPassword').value)
-        {
-          document.getElementById('moreNewPassword').style.border = '1px solid grey';
-        }
-
-         e.preventDefault();
-        $.ajax({
-          url : '/changePassword',
-          type : 'POST',
-          dataType : 'text',
-          data : $(this).serialize(),
-          success: function(data){
-               $("#server").html('Your Password : ' + data);
-          },
-          error: function()
-          {
-               $("#server").html('error');
-          }
-
-        });
-
-        document.getElementById("result").innerHTML = "Your password was changed";
-        setTimeout(function(){ $('#result').hide(); }, 5000);
-        setTimeout(function(){ $('#result').show(); }, 2000);
-
-    });
-
-    </script>
-
-
-    <script>
-
-      var myApp = angular.module('myApp',[ ]);
-
-      myApp.controller('myController', ['$scope', '$http', function ($scope,$http){
-        $scope.name = '';
-        $scope.password = '';
-
-        $scope.getUser = function ()
-        {
-            $http.get('getDb')
-           .then(function(response)
-           {
-              $scope.dataset = response.data;
-           });
-
-        }
-        $scope.getUser();
-
-     }]);
-
-   </script>
-
-
-    <script>
-
-    function escape()
-    {
-      document.getElementById("close").style.display = 'none';
-      document.getElementById("oldPassword").style.display = 'none';
-      document.getElementById("newPassword").style.display = 'none';
-      document.getElementById("moreNewPassword").style.display = 'none';
-      document.getElementById("submit").style.display = 'none';
-    }
-
-    </script>
-
-     <script>
-       function hide3()
-       {
-         document.getElementById('newPassword').style.border = '1px solid grey';
-         document.getElementById('newPassword').value = '';
-       }
-     </script>
-
-     <script>
-
-       function hide()
-       {
-         document.getElementById('newPassword').style.border = '1px solid grey';
-         document.getElementById('newPassword').value = '';
-           document.getElementById('oldPassword').style.border = '1px solid grey';
-           document.getElementById('oldPassword').value = '';
-       }
-
-     </script>
-
-     <script>
-
-     function hide2()
-     {
-     document.getElementById('moreNewPassword').style.border = '1px solid grey';
-     document.getElementById('moreNewPassword').value = '';
-     }
-
-    </script>
-
-
-   <script>
-     function newForm()
-     {
-        document.getElementById("close").style.display = 'block';
-        document.getElementById("oldPassword").style.display = 'block';
-        document.getElementById("newPassword").style.display = 'block';
-        document.getElementById("moreNewPassword").style.display = 'block';
-        document.getElementById("oldPassword").value = '';
-        document.getElementById("newPassword").value = '';
-        document.getElementById("moreNewPassword").value = '';
-        document.getElementById("submit").style.display = 'block';
-     }
-   </script>
-
 
   </body>
 </html>

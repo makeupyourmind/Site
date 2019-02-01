@@ -5,6 +5,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <title>Sign up</title>
   <link rel="stylesheet" href="/public/css/register.css">
+
+  <script src="/scripts/register/anjular.js"></script>
+  <script src="/scripts/register/CheckForm.js"></script>
+  <script src="/scripts/register/Data.js"></script>
+  <script src="/scripts/register/offBorder.js"></script>
+
 </head>
 <body ng-app = "errorName" ng-controller = "controlName">
 
@@ -56,7 +62,7 @@
         <input type="text" id = "email" name = "email" placeholder="Enter E-mail" onclick = "offBorderEmail()">
         <span class = "enterError" id = 'errorEmail'></span>
     </div>
-    <span class = "code">Activation code will be sent to this Email.<br>Please enter email type @gmail.com</span>
+    <p class = "code">Activation code will be sent to this Email. Please enter email type @gmail.com</p>
     <br>
 
     <input name = "clock" id = "clock" hidden = "true">
@@ -64,120 +70,6 @@
 
 
   </form>
-
-
-  <script>
-   function checkForm()
-   {
-     if(document.myForm.name.value == '')
-     {
-       document.getElementById('errorName').style.display = 'block';
-       document.getElementById('errorName').innerHTML = 'Enter data';
-       document.getElementById('name').style.border = '1px solid red';
-       return false;
-     }
-     if(document.myForm.password.value == '')
-     {
-       document.getElementById('errorPassword').style.display = 'block';
-       document.getElementById('errorPassword').innerHTML = 'Enter data';
-       document.getElementById('password').style.border = '1px solid red';
-       return false;
-     }
-
-     var y = document.getElementById('email').value;
-     at = y.indexOf("@");
-     dot = y.indexOf(".");
-
-     if( at < 1 || dot < 1 )
-     {
-       document.getElementById('errorEmail').style.display = 'block';
-       document.getElementById('errorEmail').innerHTML = 'Enter data';
-       document.getElementById('email').style.border = '1px solid red';
-       return false;
-     }
-
-     if(document.getElementById('name').value == document.getElementById('item').innerHTML)
-     {
-       document.getElementById('name').style.border = '1px solid red';
-       return false;
-     }
-
-     var y = document.getElementById('email').value;
-     at = y.indexOf("@");
-     dot = y.indexOf(".");
-
-     if( at < 1 || dot < 1 )
-     {
-       document.getElementById('email').style.border = '1px solid red';
-       return false;
-     }
-
-     return true;
-   }
-
-  </script>
-
-
-  <script>
-
-
-  var d = new Date();
-
-  var day = new Array("Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
-
-  var month=new Array("January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December");
-
-   //document.write( day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear() + "г.");
-   document.getElementById('clock').value = day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
-   //var date = new Date();
-  //document.write( date.getDay() + " "  + date.getHours());
-
-  </script>
-
-
-   <script>
-   function offBorderName()
-   {
-      document.getElementById("errorName").style.display = "none";
-      document.getElementById('name').style.border = '1px solid grey';
-   }
-   function offBorderPassword()
-   {
-      document.getElementById("errorPassword").style.display = "none";
-      document.getElementById('password').style.border = '1px solid grey';
-   }
-   function offBorderEmail()
-   {
-      document.getElementById("errorEmail").style.display = "none";
-      document.getElementById('email').style.border = '1px solid grey';
-   }
-   </script>
-
-
-
-   <script>
-
-     var myApp = angular.module('errorName',[ ]);
-
-     myApp.controller('controlName', ['$scope', '$http', function ($scope,$http){
-       $scope.name = '';
-
-   $scope.getUser = function (){
-       $http.get('getDb')
-   .then(function(response) {
-         $scope.dataset = response.data;
-     });
-
-   }
-
-    $scope.getUser();
-
-     }]);
-
-   </script>
-
-
 
   </div>
 </div>

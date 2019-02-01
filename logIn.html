@@ -7,6 +7,11 @@
 
   <link rel="stylesheet" href="/public/css/logIn.css">
 
+   <script src="/scripts/logIn/anjular.js"></script>
+   <script src="/scripts/logIn/CheckForm.js"></script>
+   <script src="/scripts/logIn/offBorder.js"></script>
+   <script src="/scripts/logIn/repeat.js"></script>
+
 </head>
 <body ng-app="myApp" ng-controller = "myController">
 
@@ -70,40 +75,6 @@
       </tr>
     </table>
 
-  <script>
-    function repeat ()
-    {
-       document.getElementById("hiddenName").value = document.getElementById("repeat").innerHTML;
-       document.getElementById("hiddenPassword").value = document.getElementById("repeatPass").innerHTML;
-    }
-  </script>
-
-  <script>
-
-    var myApp = angular.module('myApp',[ ]);
-
-    myApp.controller('myController', ['$scope', '$http', function ($scope,$http){
-      $scope.name = '';
-      $scope.password = '';
-
-      $scope.getUser = function ()
-      {
-          $http.get('getDb')
-         .then(function(response)
-         {
-            $scope.dataset = response.data;
-         });
-
-      }
-
-       $scope.getUser();
-
-    }]);
-
-  </script>
-
-
-
   <!--<div id = "server" style = "color : yellow; margin-top : 10px; margin-left : 20px;"></div> -->
 
 
@@ -136,54 +107,6 @@
   });
 
 </script> -->
-
-
-  <script>
-   function checkForm()
-   {
-     if(document.getElementById('name').value == '')
-     {
-       document.getElementById('errorName').style.display = 'block';
-       document.getElementById('errorName').innerHTML = 'Enter data';
-       document.getElementById('name').style.border = '1px solid red';
-       return false;
-     }
-     if(document.getElementById('password').value == '')
-     {
-       document.getElementById('errorPassword').style.display = 'block';
-       document.getElementById('errorPassword').innerHTML = 'Enter data';
-       document.getElementById('password').style.border = '1px solid red';
-       return false;
-     }
-     if(document.getElementById('name').value != document.getElementById('hiddenName').value || document.getElementById('password').value != document.getElementById('hiddenPassword').value )
-     {
-       document.getElementById('result').style.display = "block";
-       document.getElementById('result').innerHTML = "Incorrect nickname or password ";
-       document.getElementById('name').style.border = '1px solid red';
-       document.getElementById('password').style.border = '1px solid red';
-       return false;
-     }
-     return true;
-   }
-
- </script>
-
-   <script>
-   function offBorderName()
-   {
-      document.getElementById("errorName").style.display = "none";
-      document.getElementById('name').style.border = '1px solid grey';
-      document.getElementById('name').value = '';
-      document.getElementById('result').style.display = 'none';
-   }
-   function offBorderPassword()
-   {
-      document.getElementById("errorPassword").style.display = "none";
-      document.getElementById('password').style.border = '1px solid grey';
-      document.getElementById('password').value = '';
-      document.getElementById('result').style.display = 'none';
-   }
-   </script>
 
   </div>
 </div>
