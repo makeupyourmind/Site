@@ -1,3 +1,4 @@
+$(function () {
 $('#myForm').submit(function(e) {
 
   if(document.getElementById('oldPassword').value != document.getElementById('dataPassword').value || document.getElementById('oldPassword').value == '')
@@ -44,4 +45,6 @@ $('#myForm').submit(function(e) {
   setTimeout(function(){ $('#result').hide(); }, 5000);
   setTimeout(function(){ $('#result').show(); }, 2000);
 
-});
+})
+
+})
