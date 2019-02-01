@@ -61,6 +61,7 @@ var nameBody = req.body.name;
 
 if(nameBody == 'admin' && password == 'admin')
 {
+
   res.render(__dirname + '/views/doneEnter');//попадает на страницу где видны все зарегистрированные пользователи
 }
 
@@ -71,16 +72,12 @@ client.query('select name, password, email from usersdata WHERE name = $1', [nam
   for (let row of result.rows) {
     console.log("select login : " + JSON.stringify(row));
   }
+  console.log("result logIn : ", result.rows[0]);
 
   if(result.rows.length > 0 && nameBody == result.rows[0].name && password == result.rows[0].password )
   {
     res.render(__dirname + '/views/homePage', {data: result.rows[0]} );
   }
-  else
-  {
-   res.render(__dirname + '/views/ErrorLogIn');
-  }
-
   client.end();
 });
 
@@ -118,7 +115,7 @@ client.query('SELECT *from usersdata', (err, result) =>
   if (err) throw err;
   for (let row of result.rows) {
 
-    console.log("select getUsers: " + JSON.stringify(row));
+    //console.log("select getUsers: " + JSON.stringify(row));
   }
   res.send(result.rows);
   client.end();

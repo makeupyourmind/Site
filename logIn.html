@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/public/css/logIn.css">
 
 </head>
-<body>
+<body ng-app="myApp" ng-controller = "myController">
 
   <div class = "logo">
 
@@ -39,39 +39,127 @@
   <div class = "block">
   <h1>Put your information to log in</h1>
   <div class = "form">
-  <form name = "myForm" id = "myForm" method = "post" action = "/homePage" onsubmit="checkForm()">
+  <form name = "myForm" id = "myForm" method = "post" action = "/homePage" onsubmit="return checkForm()">
 
     <div class = "nick"><label>NickName : </label>
-            <input type = "text" name = "name" class = "form-control" placeholder = "Enter Your NickName"
+            <input autofocus type = "text" name = "name" ng-model = "name" class = "form-control" value = "" placeholder = "Enter Your NickName"
             autocomplete="off" id = "name" onclick = "offBorderName()">
             <span class = "enterError" id = 'errorName'></span>
     </div>
           <br></br>
     <div class="pass"><label>Password : </label>
-      <input type="password" name = "password" placeholder="Password" autocomplete="off" id = "password" onclick = "offBorderPassword()">
+      <input type="password" name = "password" placeholder="Password" value = "" autocomplete="off" id = "password" onclick = "offBorderPassword(); repeat()">
       <span class = "enterError" id = 'errorPassword'></span>
     </div>
+
+    <input type = "text" id = "hiddenName" style = "display: none">
+    <input type = "text" id = "hiddenPassword" style = 'display : none'>
 
     <br>
 
     <input type = "submit" id = "submit" value="Confirm">
 
+    <div id = "result"></div>
+
   </form>
+
+    <table>
+      <tr ng-repeat = "item in dataset | filter : name : true">
+        <td id = "repeat" style = 'display : none'>{{item.name}}</td>
+        <td id = "repeatPass" style = 'display : none'>{{item.password}}</td>
+      </tr>
+    </table>
+
+  <script>
+    function repeat ()
+    {
+       document.getElementById("hiddenName").value = document.getElementById("repeat").innerHTML;
+       document.getElementById("hiddenPassword").value = document.getElementById("repeatPass").innerHTML;
+    }
+  </script>
+
+  <script>
+
+    var myApp = angular.module('myApp',[ ]);
+
+    myApp.controller('myController', ['$scope', '$http', function ($scope,$http){
+      $scope.name = '';
+      $scope.password = '';
+
+      $scope.getUser = function ()
+      {
+          $http.get('getDb')
+         .then(function(response)
+         {
+            $scope.dataset = response.data;
+         });
+
+      }
+
+       $scope.getUser();
+
+    }]);
+
+  </script>
+
+
+
+  <!--<div id = "server" style = "color : yellow; margin-top : 10px; margin-left : 20px;"></div> -->
+
+
+ <!--  <script>
+
+    $('#myForm').submit(function(e) {
+
+       e.preventDefault();
+      $.ajax({
+        url : '/homePage',
+        type : 'POST',
+        dataType : 'text',
+        data : $(this).serialize(),
+        success: function(data){
+          if(!data)
+          {
+            $("#server").html('Incorrect NickName or Password');
+            document.getElementById('name').style.border = '1px solid red';
+            document.getElementById('password').style.border = '1px solid red';
+            setTimeout(function(){ $('#server').hide(); }, 3000);
+          }
+          else
+          {
+            window.location.href = 'homePage';
+          }
+        }
+
+      });
+
+  });
+
+</script> -->
+
 
   <script>
    function checkForm()
    {
-     if(document.myForm.name.value == '')
+     if(document.getElementById('name').value == '')
      {
        document.getElementById('errorName').style.display = 'block';
        document.getElementById('errorName').innerHTML = 'Enter data';
        document.getElementById('name').style.border = '1px solid red';
        return false;
      }
-     if(document.myForm.password.value == '')
+     if(document.getElementById('password').value == '')
      {
        document.getElementById('errorPassword').style.display = 'block';
        document.getElementById('errorPassword').innerHTML = 'Enter data';
+       document.getElementById('password').style.border = '1px solid red';
+       return false;
+     }
+     if(document.getElementById('name').value != document.getElementById('hiddenName').value || document.getElementById('password').value != document.getElementById('hiddenPassword').value )
+     {
+       document.getElementById('result').style.display = "block";
+       document.getElementById('result').innerHTML = "Incorrect nickname or password ";
+       document.getElementById('name').style.border = '1px solid red';
        document.getElementById('password').style.border = '1px solid red';
        return false;
      }
@@ -85,11 +173,15 @@
    {
       document.getElementById("errorName").style.display = "none";
       document.getElementById('name').style.border = '1px solid grey';
+      document.getElementById('name').value = '';
+      document.getElementById('result').style.display = 'none';
    }
    function offBorderPassword()
    {
       document.getElementById("errorPassword").style.display = "none";
       document.getElementById('password').style.border = '1px solid grey';
+      document.getElementById('password').value = '';
+      document.getElementById('result').style.display = 'none';
    }
    </script>
 

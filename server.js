@@ -36,6 +36,7 @@ app.get('/contact', function(req,res)
 app.get('/logUser', function(req,res)
 {
   res.sendFile(__dirname + '/logIn.html');
+  //res.render(__dirname + '/views/logIn');
 })
 
 app.get('/addUser', function(req,res)
@@ -48,9 +49,8 @@ app.post('/getData', function(req,res)
     dbConnect.getData(req,res);
 })
 
-app.post('/homePage', function(req,res)
+app.post('/homePage',function(req,res)
 {
-    console.log("connected");
     dbConnect.logIn(req,res);
 })
 
@@ -89,6 +89,7 @@ app.post( '/changePassword', function(req,res)
 {
     changePassword.changePassword(req,res);
 })
+
 
 app.listen(port, function(){
   console.log("Мы отслеживаем порт : " + port );

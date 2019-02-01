@@ -16,24 +16,80 @@
        <a href="/">Log Out</a>
        <div class="data">
           <p>Your NickName : <%= data.name %></p>
-          <p>Your Password : <%= data.password %></p>
+          <p id = "server">Your Password : <%= data.password %></p>
           <p>Your Email : <%= data.email %> </p>
         </div>
      <form name="myForm" id = "myForm">
-<input id = "dataEmail" name = "dataEmail" value = "<%= data.email %>" type = "text" style = "display : none">
-<input id = "dataName" name = "dataName" value = "<%= data.name %>" type = "text" style = "display : none">
-<input id = "dataPassword" value = "<%= data.password %>" type = "text" style = "display : none">
+        <input id = "dataEmail" name = "dataEmail" value = "<%= data.email %>" type = "text" style = "display : none">
+        <input id = "dataName" name = "dataName" value = "<%= data.name %>" type = "text" style = "display : none">
+        <input id = "dataPassword" value = "<%= data.password %>" type = "text" style = "display : none">
         <div class = "changePassword">
           <button type="button" name="button" onclick="newForm()">Change Password</button> <button id = "close" class="close" type="button" name="button" onclick = "escape()" >Close</button>
-          <input class = "oldPassword" id = "oldPassword" type="text" autocomplete = "off" name="oldPassword" value="" onclick="hide()" placeholder="Enter current password">
+          <input autofocus class = "oldPassword" id = "oldPassword" type="text" autocomplete = "off" name="oldPassword" value="" onclick="hide()" placeholder="Enter current password">
           <input class = "newPassword" id = "newPassword" type="text" autocomplete = "off" name="newPassword" value="" onclick="hide3()" placeholder="Enter new password">
           <input class = "moreNewPassword" id = "moreNewPassword" type="text" autocomplete = "off" name="moreNewPassword" value="" onclick="hide2()" placeholder="Enter new password again">
           <input class = "change" id = "submit" type="submit" name="submit" value="Change">
         </div>
 
     </form>
-    <div id="result" style = "color : black; font-size: 15px; margin-top: 5px;"></div>
+      <div id="result" style = "color : black; font-size: 15px; margin-top: 5px;"></div>
+
     </div>
+
+<div id = "message"></div>
+
+    <script>
+
+      $('#myForm').submit(function(e) {
+
+        if(document.getElementById('oldPassword').value != document.getElementById('dataPassword').value || document.getElementById('oldPassword').value == '')
+        {
+          document.getElementById('oldPassword').style.border = '1px solid red';
+          return false;
+        }
+
+        if(document.getElementById('newPassword').value == '')
+        {
+          document.getElementById('newPassword').style.border = '1px solid red';
+          return false;
+        }
+
+        if(document.getElementById('moreNewPassword').value == '' || document.getElementById('newPassword').value != document.getElementById('moreNewPassword').value)
+        {
+          document.getElementById('moreNewPassword').style.border = '1px solid red';
+          document.getElementById('newPassword').style.border = '1px solid grey';
+          return false;
+        }
+
+        if(document.getElementById('newPassword').value == document.getElementById('moreNewPassword').value)
+        {
+          document.getElementById('moreNewPassword').style.border = '1px solid grey';
+        }
+
+         e.preventDefault();
+        $.ajax({
+          url : '/changePassword',
+          type : 'POST',
+          dataType : 'text',
+          data : $(this).serialize(),
+          success: function(data){
+               $("#server").html('Your Password : ' + data);
+          },
+          error: function()
+          {
+               $("#server").html('error');
+          }
+
+        });
+
+        document.getElementById("result").innerHTML = "Your password was changed";
+        setTimeout(function(){ $('#result').hide(); }, 5000);
+        setTimeout(function(){ $('#result').show(); }, 2000);
+
+    });
+
+    </script>
+
 
     <script>
 
@@ -59,7 +115,6 @@
    </script>
 
 
-
     <script>
 
     function escape()
@@ -73,45 +128,6 @@
 
     </script>
 
-    <script>
-  $(function () {
-    $("#myForm").submit(function (event) {
-
-      if(document.getElementById('oldPassword').value != document.getElementById('dataPassword').value || document.getElementById('oldPassword').value == '')
-      {
-        document.getElementById('oldPassword').style.border = '1px solid red';
-        return false;
-      }
-
-      if(document.getElementById('newPassword').value == '')
-      {
-        document.getElementById('newPassword').style.border = '1px solid red';
-        return false;
-      }
-
-      if(document.getElementById('moreNewPassword').value == '' || document.getElementById('newPassword').value != document.getElementById('moreNewPassword').value)
-      {
-        document.getElementById('moreNewPassword').style.border = '1px solid red';
-        document.getElementById('newPassword').style.border = '1px solid grey';
-        return false;
-      }
-
-      if(document.getElementById('newPassword').value == document.getElementById('moreNewPassword').value)
-      {
-        document.getElementById('moreNewPassword').style.border = '1px solid grey';
-      }
-
-      event.preventDefault();
-      $.post("/changePassword", $(this).serialize());
-      document.getElementById("result").innerHTML = "On email you got a new password";
-      setTimeout(function(){ $('#result').hide(); }, 5000);
-      setTimeout(function(){ $('#result').show(); }, 2000);
-    })
-
-  })
-    </script>
-
-
      <script>
        function hide3()
        {
@@ -124,6 +140,8 @@
 
        function hide()
        {
+         document.getElementById('newPassword').style.border = '1px solid grey';
+         document.getElementById('newPassword').value = '';
            document.getElementById('oldPassword').style.border = '1px solid grey';
            document.getElementById('oldPassword').value = '';
        }

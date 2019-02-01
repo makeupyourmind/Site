@@ -85,6 +85,7 @@ hr
 .about
 {
   border : 1px solid;
+  border-radius: 10px;
   background : #FFFFFF;
   padding : 10px;
   margin : 0 auto;
@@ -105,8 +106,9 @@ hr
 {
   color : #1E90FF;
   font-weight : bolder;
-  font-size : 25px;
+  font-size : 23px;
   text-align : center;
+  font-family : 'Arial';
 }
 
 ul
@@ -184,4 +186,5 @@ li
  label
  {
    font-size: 18px;
+   font-family : 'Arial';
  }

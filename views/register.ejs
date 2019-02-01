@@ -41,7 +41,7 @@
   <form name = "myForm" method = "post" action = "/getData" onsubmit="return checkForm()">
 
     <div class = "nick"> <label>NickName : </label>
-      <input type = "text" name = "name" placeholder = "Enter Your NickName" autocomplete="off" id = "name" onclick = "offBorderName()" ng-model = "name">
+      <input autofocus type = "text" name = "name" placeholder = "Enter Your NickName" autocomplete="off" id = "name" onclick = "offBorderName()" ng-model = "name">
       <span class = "enterError" id = 'errorName'></span>
       <br>
       <span ng-repeat = "item in dataset | filter : name : true " style = "color : yellow; margin-left: 100px">Name <span id = "item">{{item.name}}</span> is taken</span>
@@ -119,7 +119,7 @@
   "July", "August", "September", "October", "November", "December");
 
    //document.write( day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear() + "г.");
-   document.getElementById('clock').value = day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear() + "г.";
+   document.getElementById('clock').value = day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
    //var date = new Date();
   //document.write( date.getDay() + " "  + date.getHours());
 

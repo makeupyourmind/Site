@@ -153,3 +153,12 @@ input
    display: none;
    float: right;
 }
+
+#result
+{
+  width: 220px;
+  text-align: center;
+  color : yellow;
+  margin-left: 115px;
+  margin-top: 5px;
+}

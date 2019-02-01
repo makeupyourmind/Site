@@ -14,22 +14,17 @@ changePassword : function(req,res)
 
   var name = req.body.name;
 
-  client.query('select *from usersdata', (err, res) => {
-    if (err) throw err;
-    for (let row of res.rows) {
-      console.log("okay");
-      console.log("select : " + JSON.stringify(row));
+      client.query("UPDATE usersdata SET password=$1 WHERE name = $2", [req.body.moreNewPassword, req.body.dataName]);
 
-    }
-
-      client.query("UPDATE usersdata SET password=$1 WHERE name = $2", [req.body.moreNewPassword, req.body.dataName] , (result) =>
-      {
-        console.log("okay");
+      client.query("SELECT password from usersdata WHERE name = $1", [req.body.dataName], (err, result) => {
+        if (err) throw err;
+        for (let row of result.rows) {
+          //console.log("select getUsers: " + JSON.stringify(row));
+          //console.log(result);
+        }
+        res.send(result.rows[0].password);
         client.end();
-      });
-
-  });
-
+      })
 
   const sgMail = require('@sendgrid/mail');
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
