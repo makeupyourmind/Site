@@ -46,12 +46,12 @@
       <br>
       <span ng-repeat = "item in dataset | filter : name : true " style = "color : yellow; margin-left: 100px">Name <span id = "item">{{item.name}}</span> is taken</span>
     </div>
-          <br></br>
+          <br>
     <div class="pass"> <label>Password : </label>
       <input type = "password" name = "password" placeholder = "Password" autocomplete = "off" id = "password" onclick = "offBorderPassword()">
       <span class = "enterError" id = 'errorPassword'></span>
     </div>
-          <br></br>
+          <br>
     <div class="email"> <label>Email : </label>
         <input type="text" id = "email" name = "email" placeholder="Enter E-mail" onclick = "offBorderEmail()">
         <span class = "enterError" id = 'errorEmail'></span>
@@ -111,7 +111,7 @@
        document.getElementById('email').style.border = '1px solid red';
        return false;
      }
-     
+
      return true;
    }
 
