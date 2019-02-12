@@ -1,6 +1,6 @@
 function proveForm()
 {
-  if(document.myForm.confirmEmail.value == '' || document.myForm.confirmEmail.value != <%= data %>)
+  if(document.myForm.confirmEmail.value == '')
   {
     document.getElementById('errorCode').style.display = 'block';
     document.getElementById('errorCode').innerHTML = 'Error code';
